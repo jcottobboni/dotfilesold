@@ -1,0 +1,269 @@
+#!/usr/bin/env bash
+
+magenta='\e[1;35m'
+green='\e[1;32m'
+white='\e[0;37m'
+
+CMD="$1"
+
+printusage() {
+    prog=$(basename "$0")
+    echo "Usage: $prog [-option]" >&2
+    echo "" >&2
+    echo "Options:" >&2
+    echo "    --help    Print this message" >&2
+    echo "    -a        Update all packages" >&2
+}
+
+oh-my-zsh() {
+    echo -e $magenta"\n Updating oh-my-zsh... \n"$white
+    /bin/sh ~/.oh-my-zsh/tools/upgrade.sh
+    echo -e $magenta"\n Updating zsh plugins... \n"$white
+    cd ~/.zsh/plugins
+    find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \;
+}
+
+base16-shell() {
+    echo -e $magenta"\n Updating base16-shell... \n"$white
+    cd ~/.config/base16-shell
+    git pull
+    ./colortest
+}
+
+i3-gaps() {
+    echo -e $magenta"\n Updating & compiling i3-gaps... \n"$white
+    cd ~/.local/src/i3-gaps
+    git pull
+    autoreconf -fi
+    rm -rf build
+    mkdir build
+    cd build
+    ../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
+    make
+    echo -e $green"\n Previous i3-gaps version: \n"$white
+    echo "─────────────────────────────────────────────────────────────────────────────────────────────────────────────"
+    /usr/bin/i3 -v
+    echo "─────────────────────────────────────────────────────────────────────────────────────────────────────────────"
+    echo -e $magenta"\n Installing i3-gaps... \n"$white
+    sudo make install
+    echo -e $green"\n Current i3-gaps version: \n"$white
+    echo "─────────────────────────────────────────────────────────────────────────────────────────────────────────────"
+    /usr/bin/i3 -v
+    echo "─────────────────────────────────────────────────────────────────────────────────────────────────────────────"
+}
+
+i3blocks() {
+    echo -e $magenta"\n Updating & compiling i3blocks... \n"$white
+    cd ~/.local/src/i3blocks
+    git pull
+    autoreconf -fi
+    ./configure
+    make
+    echo -e $green"\n Previous i3blocks version: \n"$white
+    echo "───────────────────────────────────────────────────────────────────"
+    /usr/local/bin/i3blocks -V
+    echo "───────────────────────────────────────────────────────────────────"
+    echo -e $magenta"\n Installing i3blocks... \n"$white
+    sudo make install
+    echo -e $green"\n Current i3blocks version: \n"$white
+    echo "───────────────────────────────────────────────────────────────────"
+    /usr/local/bin/i3blocks -V
+    echo "───────────────────────────────────────────────────────────────────"
+    echo -e $magenta"\n Updating i3blocks-contrib... \n"$white
+    cd ~/.local/src/i3blocks-contrib
+    git pull
+}
+
+i3lock() {
+    echo -e $magenta"\n Updating & compiling i3lock... \n"$white
+    cd ~/.local/src/i3lock-color
+    git pull
+    autoreconf -i
+    rm -rf build
+    mkdir build
+    cd build
+    ../configure
+    make
+    echo -e $green"\n Previous i3lock version: \n"$white
+    echo "───────────────────────────────────────────────────────────────────────────────────────────────"
+    /usr/local/bin/i3lock -v
+    echo "───────────────────────────────────────────────────────────────────────────────────────────────"
+    echo -e $magenta"\n Installing i3lock... \n"$white
+    sudo make install
+    echo -e $green"\n Current i3lock version: \n"$white
+    echo "───────────────────────────────────────────────────────────────────────────────────────────────"
+    /usr/local/bin/i3lock -v
+    echo "───────────────────────────────────────────────────────────────────────────────────────────────"
+    echo -e $magenta"\n Updating i3lock-fancy... \n"$white
+    cd ~/.local/src/i3lock-fancy
+    git pull
+    sudo make install
+}
+
+rofi() {
+    echo -e $magenta"\n Updating & compiling rofi... \n"$white
+    cd ~/.local/src/rofi
+    git pull
+    git submodule update --init
+    autoreconf -i
+    rm -rf build
+    mkdir build
+    cd build
+    ../configure
+    make
+    echo -e $green"\n Previous rofi version: \n"$white
+    echo "───────────────────────────────────────"
+    /usr/local/bin/rofi -v
+    echo "───────────────────────────────────────"
+    echo -e $magenta"\n Installing rofi... \n"$white
+    sudo make install
+    echo -e $green"\n Current rofi version: \n"$white
+    echo "───────────────────────────────────────"
+    /usr/local/bin/rofi -v
+    echo "───────────────────────────────────────"
+}
+
+dunst() {
+    echo -e $magenta"\n Updating & compiling dunst... \n"$white
+    cd ~/.local/src/dunst
+    git pull
+    make clean
+    make
+    echo -e $green"\n Previous dunst version: \n"$white
+    echo "──────────────────────────────────────────────────────────────────────────────────"
+    /usr/local/bin/dunst -v
+    echo "──────────────────────────────────────────────────────────────────────────────────"
+    echo -e $magenta"\n Installing dunst... \n"$white
+    sudo make install
+    echo -e $green"\n Current dunst version: \n"$white
+    echo "──────────────────────────────────────────────────────────────────────────────────"
+    /usr/local/bin/dunst -v
+    echo "──────────────────────────────────────────────────────────────────────────────────"
+}
+
+arc-theme() {
+    echo -e $magenta"\n Updating & compiling arc-theme... \n"$white
+    cd ~/.local/src/arc-theme
+    git pull
+    rm -rfv .idea autom4te.cache build-aux common/Makefile common/Makefile.in extra/Makefile extra/Makefile.in aclocal.m4 compile config.log config.status configure install-sh Makefile Makefile.in missing
+    sudo rm -rf /usr/share/themes/{Arc,Arc-Darker,Arc-Dark}
+    ./autogen.sh --prefix=/usr --disable-cinnamon --disable-gnome-shell --disable-unity --disable-xfwm --disable-plank
+    sudo make install
+}
+
+# Print help message.
+if [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
+    printusage
+    exit 0
+fi
+
+# Update one by one.
+if [[ -z "$1" ]]; then
+    echo
+    read -r -p "Do you want to update oh-my-zsh & zsh plugins? [y/n] " response
+    case $response in
+        [yY][eE][sS]|[yY])
+            oh-my-zsh
+            ;;
+        *)
+            echo "Cancelled."
+            ;;
+    esac
+
+    echo
+    read -r -p "Do you want to update base16-shell? [y/n] " response
+    case $response in
+        [yY][eE][sS]|[yY])
+            base16-shell
+            ;;
+        *)
+            echo "Cancelled."
+            ;;
+    esac
+
+    echo
+    read -r -p "Do you want to update i3-gaps? [y/n] " response
+    case $response in
+        [yY][eE][sS]|[yY])
+            i3-gaps
+            ;;
+        *)
+            echo "Cancelled."
+            ;;
+    esac
+
+    echo
+    read -r -p "Do you want to update i3blocks? [y/n] " response
+    case $response in
+        [yY][eE][sS]|[yY])
+            i3blocks
+            ;;
+        *)
+            echo "Cancelled."
+            ;;
+    esac
+
+    echo
+    read -r -p "Do you want to update i3lock? [y/n] " response
+    case $response in
+        [yY][eE][sS]|[yY])
+            i3lock
+            ;;
+        *)
+            echo "Cancelled."
+            ;;
+    esac
+
+    echo
+    read -r -p "Do you want to update rofi? [y/n] " response
+    case $response in
+        [yY][eE][sS]|[yY])
+            rofi
+            ;;
+        *)
+            echo "Cancelled."
+            ;;
+    esac
+
+    echo
+    read -r -p "Do you want to update dunst? [y/n] " response
+    case $response in
+        [yY][eE][sS]|[yY])
+            dunst
+            ;;
+        *)
+            echo "Cancelled."
+            ;;
+    esac
+
+    echo
+    read -r -p "Do you want to update arc-theme? [y/n] " response
+    case $response in
+        [yY][eE][sS]|[yY])
+            arc-theme
+            exit 0
+            ;;
+        *)
+            echo "Cancelled."
+            exit 1
+            ;;
+    esac
+fi
+
+# Update all packages.
+case "$CMD" in
+    -a)
+        oh-my-zsh
+        base16-shell
+        i3-gaps
+        i3blocks
+        i3lock
+        rofi
+        dunst
+        arc-theme
+        exit 0
+        ;;
+    *)
+        exit 1
+        ;;
+esac
