@@ -44,3 +44,8 @@ fi
 if [[ -x "$(command -v tmux)" && "$(ps -o 'cmd=' -p $(ps -o 'ppid=' -p $$))" = "alacritty" ]]; then
     [ -z "$TMUX" ] && { tmux attach-session || exec tmux && exit; }
 fi
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+export LD_LIBRARY_PATH=/usr/lib/oracle/12.2/client64/lib
+export ORACLE_HOME=/usr/lib/oracle/12.2/client64
