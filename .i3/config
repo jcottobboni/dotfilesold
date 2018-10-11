@@ -5,7 +5,7 @@ set $mod Mod4
 font pango: Fira Code Retina 9
 
 # APP VARIABLES
-set $browser    firefox
+set $browser    google-chrome
 set $music      spotify
 set $term urxvt -g 42x12
 set $dmenu      i3-dmenu-desktop
@@ -224,11 +224,11 @@ bindsym $mod+Ctrl+period exec amixer sset Master 5%+
 bindsym $mod+d exec rofi -show drun -theme list
 
 # BACKGROUND
-# set $background ~/Pictures/wallpapers/wallhaven-26472_1920x1080.png
-# exec_always feh --bg-max $background
-set_from_resource $g1 color4
-set_from_resource $g2 color12
-exec_always hsetroot -add "$g1" -add "$g2" -gradient 0
+ set $background ~/Imagens/wall/gandalf.jpg
+ exec_always feh --bg-max $background
+#set_from_resource $g1 color4
+#set_from_resource $g2 color12
+#exec_always hsetroot -add "$g1" -add "$g2" -gradient 0
 
 ##### APP RULES ###################################
 
