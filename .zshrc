@@ -35,17 +35,15 @@ source ~/.zsh/setopt.zsh
 
 # Aliases.
 source ~/.aliases
-source ~/.aliases_private
 
 # Functions.
 source ~/.functions
-source ~/.functions_private
 
 # Tracks your most used directories, based on frecency with z.
-source ~/.zsh/plugins/z/z.sh
+source ~/.oh-my-zsh/plugins/z/z.sh
 
 # fzf key bindings.
-source ~/.fzf/shell/key-bindings.zsh
+#source ~/.fzf/shell/key-bindings.zsh
 
 # dircolors.
 if [ -x "$(command -v dircolors)" ]; then
