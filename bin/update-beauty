@@ -19,7 +19,7 @@ oh-my-zsh() {
     echo -e $magenta"\n Updating oh-my-zsh... \n"$white
     /bin/sh ~/.oh-my-zsh/tools/upgrade.sh
     echo -e $magenta"\n Updating zsh plugins... \n"$white
-    cd ~/.zsh/plugins
+    cd ~/.oh-my-zsh/plugins
     find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \;
 }
 

@@ -286,7 +286,7 @@ bindsym XF86AudioPrev exec playerctl previous
 
 # start i3bar to display a workspace bar
 bar {
-  position top
+  position bottom
   i3bar_command i3bar
   status_command i3blocks
   tray_output primary
