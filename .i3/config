@@ -219,6 +219,9 @@ for_window [class="Menu"]                           floating enable
 for_window [class="Nm-connection-editor"]           floating enable
 for_window [class="Software-properties-gtk"]        floating enable
 
+# APPLICATION BORDERS
+for_window [class="URxvt"] border normal 5
+
 # assign program to workspace
 assign [class="Alacritty"]          → $ws1
 assign [class="terminal"]           → $ws1
@@ -303,3 +306,4 @@ exec --no-startup-id pulseaudio --start
 exec --no-startup-id lxpolkit
 exec --no-startup-id feh --bg-fill ~/Public/desktop/dark_planet_minimalist.png
 exec --no-startup-id compton --config ~/.config/compton/compton.conf
+exec --no-startup-id wallee
