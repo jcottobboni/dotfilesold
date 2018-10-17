@@ -18,16 +18,16 @@ set $up     l
 set $right  semicolon
 
 # define names for workspaces
-set $ws1    "1: Terminal "
-set $ws2    "2: Code "
-set $ws3    "3: Browser "
-set $ws4    "4: Files "
-set $ws5    "5: Documents "
-set $ws6    "6: Media "
-set $ws7    "7: Design "
-set $ws8    "8: Chat "
-set $ws9    "9: General "
-set $ws10   "10: Settings "
+set $ws1    "1: 1 Terminal "
+set $ws2    "2: 2 Code "
+set $ws3    "3: 3 Browser "
+set $ws4    "4: 4 Files "
+set $ws5    "5: 5 Documents "
+set $ws6    "6: 6 Media "
+set $ws7    "7: 7 Design "
+set $ws8    "8: 8 Chat "
+set $ws9    "9: 9 General "
+set $ws10   "10: 10 Settings "
 
 # use $mod+Mouse to drag floating windows to their wanted position
 floating_modifier $mod
@@ -36,8 +36,8 @@ floating_modifier $mod
 focus_follows_mouse no
 
 # window border settings
-default_border          none
-default_floating_border none
+#default_border          none
+#default_floating_border none
 
 # hiding borders adjacent to the screen edges
 hide_edge_borders none
@@ -299,7 +299,7 @@ bar {
 }
 
 # i3-gaps
-smart_gaps off
+#smart_gaps off
 #gaps inner 8
 #gaps outer 2
 
@@ -308,6 +308,6 @@ exec --no-startup-id xautolock -time 10 -locker "i3lock-fancy -f Source-Sans-Pro
 exec --no-startup-id nm-applet
 exec --no-startup-id pulseaudio --start
 exec --no-startup-id lxpolkit
-exec --no-startup-id feh --bg-fill ~/Public/desktop/dark_planet_minimalist.png
+exec --no-startup-id feh --bg-scale --no-xinerama ~/dotfiles/.wallee/wallpapers/firewatch.jpg
 exec --no-startup-id compton --config ~/.config/compton/compton.conf
 exec --no-startup-id wallee
