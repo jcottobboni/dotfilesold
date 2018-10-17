@@ -56,7 +56,7 @@ command=~/dotfiles/scripts/microphone.sh
 #
 # The type defaults to "mem" if the instance is not specified.
 [memory]
-label=
+label=
 separator=false
 interval=1
 command=~/.local/src/i3blocks-contrib/memory/memory
@@ -74,11 +74,11 @@ color=#dfe3ee
 # The directory defaults to $HOME if the instance is not specified.
 # The script may be called with a optional argument to set the alert
 # (defaults to 10 for 10%).
-#[disk]
-#label=
-#instance=/mnt/data
-#interval=30
-#separator=false
+
+[disk]
+label=
+comand=~/.local/src/i3blocks-contrib/disk/disk
+interval=30
 #color=#d9534f
 
 #[disk]
@@ -119,12 +119,18 @@ color=#00ff7f
 # If the instance is not specified, use the interface used for default route.
 # The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
 #[iface]
+#comand=~/.local/src/i3blocks-contrib/iface/iface
 #label=
-#instance=wlp4s0
 #color=#00FFFF
 #interval=10
 #separator=true
 #color=#adff00
+
+[iface]
+command=~/.local/src/i3blocks-contrib/iface/iface
+LABEL=wlan0:
+color=#00FF00
+interval=1
 
 #[bandwidth]
 #label=
@@ -176,12 +182,12 @@ interval=1
 #
 # bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
 # bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
-[keyindicator]
-instance=CAPS
-interval=once
-signal=11
+#[keyindicator]
+#instance=CAPS
+#interval=once
+#signal=11
 
-[keyindicator]
-instance=NUM
-interval=once
-signal=11
+#[keyindicator]
+#instance=NUM
+#interval=once
+#signal=11
