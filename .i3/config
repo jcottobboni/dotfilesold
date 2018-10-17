@@ -282,14 +282,14 @@ bar {
     bindsym button5         nop
     position                bottom
     tray_output             primary
-    separator_symbol        "·"
+    separator_symbol        "|"
     workspace_buttons       yes
     strip_workspace_numbers yes
 
     colors {
         background  #212121
         statusline  #dddddd
-        separator   #666666
+        separator   #ffffff
         # class             border  backgr. text
         focused_workspace   #2b83a6 #2b83a6 #ffffff
         active_workspace    #212121 #212121 #ffffff
@@ -299,9 +299,9 @@ bar {
 }
 
 # i3-gaps
-smart_gaps on
-gaps inner 8
-gaps outer 2
+smart_gaps off
+#gaps inner 8
+#gaps outer 2
 
 # startup applications
 exec --no-startup-id xautolock -time 10 -locker "i3lock-fancy -f Source-Sans-Pro"
