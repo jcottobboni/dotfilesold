@@ -127,11 +127,11 @@ color=#00ff7f
 #separator=true
 #color=#adff00
 
-[iface]
-command=~/.local/src/i3blocks-contrib/iface/iface
-LABEL=wlan0:
-color=#00FF00
-interval=1
+#[iface]
+#command=~/.local/src/i3blocks-contrib/iface/iface
+#LABEL=wlan0:
+#color=#00FF00
+#interval=1
 
 #[bandwidth]
 #label=
@@ -149,9 +149,19 @@ interval=1
 #instance=1
 #interval=30
 
+[bandwidth]
+#instance=wlp3s0
+label=
+interval=1
+
+#[bandwidth]
+#instance=wlp3s0
+#label=
+#interval=1
+
 [user]
 label=
-interval=once
+interval=1
 
 # Date Time
 [time]
