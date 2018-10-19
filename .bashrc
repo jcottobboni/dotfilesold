@@ -49,3 +49,4 @@ eval "$(rbenv init -)"
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 export LD_LIBRARY_PATH=/usr/lib/oracle/12.2/client64/lib
 export ORACLE_HOME=/usr/lib/oracle/12.2/client64
+export PATH=$HOME/cmus/bin:$PATH

@@ -230,6 +230,7 @@ for_window [class="URxvt"] border normal 5
 assign [class="Alacritty"]          → $ws1
 assign [class="terminal"]           → $ws1
 assign [class="Sublime"]            → $ws2
+assign [class="Rubymine"]           → $ws2
 assign [class="Chromium"]           → $ws3
 assign [class="Firefox"]            → $ws3
 assign [class="Authy"]              → $ws3
